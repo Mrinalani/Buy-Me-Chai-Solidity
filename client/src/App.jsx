@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import abi from "../../artifacts/contracts/Chai.sol/chai.json";
+import Buy from "./components/Buy";
 
 function App() {
   const [state, setState] = useState({
@@ -26,12 +27,18 @@ function App() {
       console.log(error)
     }
   };
+  console.log(state);
+
 
   useEffect(() => {
     connectWallet()
   },[])
 
-  return <></>;
+  return (
+    <div>
+      <Buy state={state}/>
+    </div>
+  );
 }
 
 export default App;
