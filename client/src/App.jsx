@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import abi from "../../artifacts/contracts/Chai.sol/chai.json";
-import Buy from "./components/Buy";
+import BuyChai from "./components/BuyChai";
+import Memo from "./components/Memo";
 
 function App() {
   const [state, setState] = useState({
@@ -36,7 +37,8 @@ function App() {
 
   return (
     <div>
-      <Buy state={state}/>
+      <BuyChai state={state}/>
+      <Memo state={state} />
     </div>
   );
 }
