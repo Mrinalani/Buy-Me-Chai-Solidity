@@ -20,7 +20,7 @@ const BuyChai = ({state}) => {
     await transaction.wait();
   }
 
-
+   console.log("checking",state.contract)
   return (
     <div className='buy-container'>
       <form className='buy-form' onSubmit={handleSubmit}>
@@ -44,7 +44,7 @@ const BuyChai = ({state}) => {
             onChange={(e) => setData({ ...data, message: e.target.value })}
           />
         </div>
-        <button className='form-button' disabled={!state?.contract}>
+        <button className='form-button' disabled={!state.contract}>
           Pay
         </button>
       </form>

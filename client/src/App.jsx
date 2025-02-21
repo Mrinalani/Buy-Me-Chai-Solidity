@@ -10,6 +10,8 @@ function App() {
     signer: null,
     contract: null,
   });
+
+  const [account, setAccount] = useState('none')
   const connectWallet = async () => {
     const contractAddress = "0xa2b05Ece5168aF2cDE09Ad3970d11Ce94321673e";
     try {
@@ -18,11 +20,21 @@ function App() {
         const account = await ethereum.request({
           method: "eth_requestAccounts",
         });
+
+        window.ethereum.on("accountChange" ,() =>{
+          window.location.reload()
+        })
+        window.ethereum.on("chainChanged", () => {
+          window.location.reload()
+        })
         const provider = new ethers.BrowserProvider(ethereum);
         const signer = await provider.getSigner();
         const contract = new ethers.Contract(contractAddress, abi.abi, signer);
+        setAccount(account)
         setState({provider, signer, contract});
         console.log(state);
+      }else{
+        alert("please inatall metamask")
       }
     } catch (error) {
       console.log(error)
@@ -37,7 +49,9 @@ function App() {
 
   return (
     <div>
+      <h1>Buy Chai</h1>
       <BuyChai state={state}/>
+      <div>connected account: {account}</div>
       <Memo state={state} />
     </div>
   );
